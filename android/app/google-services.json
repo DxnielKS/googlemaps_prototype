@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "328792592749",
+    "project_id": "maps-api-prototype-bf211",
+    "storage_bucket": "maps-api-prototype-bf211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328792592749:android:7a1c495cb0f2b68b338a64",
+        "android_client_info": {
+          "package_name": "com.zane.googlemaps_prototype"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328792592749-k9rhhe5or1ovq64fbg35bvc7h7k0jogr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwfnPcsF2BBbE-pAA-emxgE1zxItT9CuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328792592749-k9rhhe5or1ovq64fbg35bvc7h7k0jogr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

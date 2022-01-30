@@ -15,24 +15,25 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 120,
-        width: double.infinity,
-        color: color,
-        child: ButtonTheme(
-            child: TextButton(
-              onPressed: () {print("hello");},
-              style: TextButton.styleFrom(
-                primary: color
-              ),
-              child :Text(text,style:
-              TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
-              ),
+      height: 120,
+      width: double.infinity,
+      color: color,
+      child: ButtonTheme(
+        child: TextButton(
+          onPressed: () {
+            onPress();
+          },
+          style: TextButton.styleFrom(primary: color),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 }

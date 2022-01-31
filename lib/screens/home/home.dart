@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -59,7 +60,19 @@ class _HomeState extends State<Home> {
                   setState(() {
                     mapController = controller;
                   });
+                },onCameraMove: (CameraPosition cameraPositiona) {
+                cameraPosition = cameraPositiona;
+              },
+                onCameraIdle: () async {
+                  List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
+                  setState(() {
+                    location = placemarks.first.administrativeArea.toString() + ", " +  placemarks.first.street.toString();
+                  });
                 },
+              ),
+
+              Center( //picker image on google map
+                child: Image.asset("assets/picker.png", width: 40,),
               ),
 
 

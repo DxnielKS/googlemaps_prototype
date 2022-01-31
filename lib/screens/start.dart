@@ -47,13 +47,6 @@ class StartPage extends StatelessWidget {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Register()));
                     }),
-                AuthButton(
-                    color: Colors.red,
-                    text: "SIGN UP WITH GOOGLE",
-                    onPress: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Register()));
-                    }),
               ],
             ),
           )

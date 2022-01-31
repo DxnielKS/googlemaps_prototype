@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return StartPage();
     } else {
-      return Home();
+      return MyApp();
     }
   }
 }

@@ -1,11 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.googlemaps_prototype">
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
    <application
         android:label="googlemaps_prototype"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
        <meta-data android:name="com.google.android.geo.API_KEY"
                   android:value="AIzaSyAlb2y4PT8shplcLijTaObFr7VwY59U1wo"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

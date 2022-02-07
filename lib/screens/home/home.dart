@@ -29,35 +29,36 @@ class _HomeState extends State<Home> {
   CameraPosition? cameraPosition;
   LatLng startLocation = LatLng(51.5072178, -0.1275862);
   String location = "Search Location";
-  Set<Marker> bikeLocations = <Marker>{};
+  Set<Marker> bikeLocations = Set<Marker>();
 
   Future<void> main1() async {
     final client = tflApi.clientViaAppKey("99446f25adc0404db3f1b7050199442a");
 
     final api = tflApi.TflApiClient(client: client);
-
-    for (var line in await api.bikePoints.getAll()) {
-      for (var occupancy in await api.occupancies
-          .getBikePointsOccupanciesByPathIds([line.id!])) {
-        bikeLocations.add(
-            Marker(
-              infoWindow: InfoWindow(
-                  title: "${line.commonName}",
-                  snippet: "${occupancy.bikesCount} Bikes Free - "
-                      "${occupancy.emptyDocks} Empty Docks - "
-                      "${occupancy.totalDocks} Total Docks"
-              ),
-              markerId: MarkerId('${line.id}'),
-              position: LatLng(line.lat!, line.lon!),
-              icon: BitmapDescriptor.defaultMarker,
-            )
-        );
+    List<String> bikes = [];
+    final response = await api.bikePoints.getAll();
+    for (var line in response) {
+       // tflApi.BikePointOccupancy? bike_occupancy;
+       // var occupancy = await api.occupancies.getBikePointsOccupanciesByPathIds([line.id!]).then((value) {
+       //   bike_occupancy = value.first;
+       // });
+       bikeLocations.add(
+           Marker(
+             infoWindow: InfoWindow(
+                 title: "${line.commonName}",
+                 snippet: "${line.additionalProperties![6].value} Bikes Free - "
+                     "${line.additionalProperties![7].value} Empty Docks - "
+                     "${line.additionalProperties![8].value} Total Docks"
+             ),
+             markerId: MarkerId('${line.id}'),
+             position: LatLng(line.lat!,line.lon!),
+             icon: BitmapDescriptor.defaultMarker,
+           )
+       );
       }
     }
-    client.close();
-  }
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     main1();
   }
@@ -77,7 +78,21 @@ class _HomeState extends State<Home> {
                   icon: Icon(Icons.person),
                   label: Text("Log Out")),
             ]),
-        body: Stack(children: [
+        body: Stack(children: [FutureBuilder(future: main1(),
+            builder: (context, snapshot) {
+          print(bikeLocations.length);
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Text("there is no connection");
+
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return Center(child: new CircularProgressIndicator());
+
+                case ConnectionState.done:
+                  return Text("FINISHED");
+              }
+            }),
           GoogleMap(
             //Map widget from google_maps_flutter package
             zoomGesturesEnabled: true,
